@@ -1,0 +1,295 @@
+<div *ngIf="controleBack" class="container d-flex pt-4 flex-wrap justify-content-between align-item-between">
+    <div class="card mb-4" style="width: 18rem;" *ngFor="let item of productArr">
+        <img [src]="apiUrl+'/'+item._id+'/'+item.productImage" class="card-img-top" alt="...">
+        <div class="card-body">
+            <p><b>Product Name : </b> {{item.productName}}</p>
+            <p><b>Product Price : </b> {{item.productPrice}}</p>
+            <p><b>Product Storage : </b> {{item.productStorage}}</p>
+            <button mat-raised-button color="primary" (click)="getData(item,item._id)">Update</button>
+            <button mat-raised-button color="warn" class="ms-3" (click)="deleteProduct(item._id)">Delete</button>
+            <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+        </div>
+    </div>
+</div>
+
+
+<div *ngIf="controleElectronic">
+    <mat-stepper [linear]="isLinear" #stepper>
+        <mat-step [stepControl]="updateForm">
+            <form [formGroup]="updateForm">
+                <ng-template matStepLabel>Fill out Basic Detail</ng-template>
+
+                <div style="width: 600px; margin: auto;">
+                    <div class="mb-3">
+                        <label for="productType" class="form-label">Product Type </label>
+                        <input type="text" class="form-control" id="productType" formControlName="productType">
+                    </div>
+                    <div class="mb-3">
+                        <label for="productName" class="form-label">Product Name </label>
+                        <input type="text" class="form-control" id="productName" formControlName="productName">
+                    </div>
+                    <div class="mb-3">
+                        <label for="productStorage" class="form-label">Product Storage</label>
+                        <input type="text" class="form-control" id="productStorage" formControlName="productStorage">
+                    </div>
+                    <div class="mb-3">
+                        <label for="productPrice" class="form-label">Product Price</label>
+                        <input type="number" class="form-control" id="productPrice" formControlName="productPrice">
+                    </div>
+                    <div class="mb-3">
+                        <label for="formFile" class="form-label">Upload Profile Image</label>
+                        <input class="form-control" type="file" accept="image/png,image/jpeg" id="formFile"
+                            (change)="getImage($event)">
+                    </div>
+                    <div class="text-center">
+                        <button mat-raised-button matStepperNext color="warn" (click)="homePage()" class="me-3">Go to viewProduct Page</button>
+                        <button mat-raised-button matStepperNext color="accent" >Next</button>
+
+                    </div>
+                </div>
+            </form>
+        </mat-step>
+
+        <mat-step [stepControl]="updateForm" label="Fill out your address">
+            <form [formGroup]="updateForm">
+                <ng-template matStepLabel>Fill out Other Detail</ng-template>
+
+                <div style="width: 600px; margin: auto;">
+                    <div class="mb-3">
+                        <label for="productName" class="form-label">Model Name</label>
+                        <input type="text" class="form-control" id="productName" formControlName="ModelName">
+                    </div>
+                    <div class="mb-3">
+                        <label for="productStorage" class="form-label">color</label>
+                        <input type="text" class="form-control" id="productStorage" formControlName="color">
+                    </div>
+                    <div class="mb-3">
+                        <label for="productPrice" class="form-label">Display Size</label>
+                        <input type="text" class="form-control" id="productPrice" formControlName="displaysize">
+                    </div>
+                    <div class="mb-3">
+                        <label for="productPrice" class="form-label">Operating System</label>
+                        <input type="text" class="form-control" id="productPrice" formControlName="operatingsystem">
+                    </div>
+                    <div class="mb-3">
+                        <label for="productPrice" class="form-label">Front Camera</label>
+                        <input type="text" class="form-control" id="productPrice" formControlName="frontcamera">
+                    </div>
+                    <div class="mb-3">
+                        <label for="productPrice" class="form-label">Rear Camera</label>
+                        <input type="text" class="form-control" id="productPrice" formControlName="rearcamera">
+                    </div>
+                    <div class="mb-3">
+                        <label for="productPrice" class="form-label">Network Type</label>
+                        <input type="text" class="form-control" id="productPrice" formControlName="networktype">
+                    </div>
+                    <div class="mb-3">
+                        <label for="productPrice" class="form-label">Warranty Service</label>
+                        <input type="text" class="form-control" id="productPrice" formControlName="Warranty">
+                    </div>
+                    <div class="mb-3">
+                        <label for="NumberOfProduct" class="form-label">No. of Product</label>
+                        <input type="text" class="form-control" id="productPrice" formControlName="NumberOfProduct">
+                    </div>
+
+                    <div class="text-center">
+                        <button mat-raised-button matStepperPrevious color="warn" class="me-3">Back</button>
+                        <button mat-raised-button matStepperNext color="accent">Next</button>
+                    </div>
+                </div>
+            </form>
+        </mat-step>
+        <mat-step>
+            <ng-template matStepLabel>Done</ng-template>
+            <div class="text-center mt-5">
+                <button mat-raised-button matStepperPrevious color="warn" class="me-3">Back</button>
+                <button mat-raised-button (click)="stepper.reset()" color="accent" class="me-3">Reset</button>
+                <button type="submit" class="btn btn-primary me-3" (click)="updateproduct()">Update</button>
+            </div>
+        </mat-step>
+    </mat-stepper>
+</div>
+
+<div *ngIf="controleElectric">
+    <mat-stepper [linear]="isLinear" #stepper>
+        <mat-step [stepControl]="updateForm">
+            <form [formGroup]="updateForm">
+                <ng-template matStepLabel>Fill out Basic Detail</ng-template>
+
+                <div style="width: 600px; margin: auto;">
+                    <div class="mb-3">
+                        <label for="productType" class="form-label">Product Type </label>
+                        <input type="text" class="form-control" id="productType" formControlName="productType">
+                    </div>
+                    <div class="mb-3">
+                        <label for="productName" class="form-label">Product Name </label>
+                        <input type="text" class="form-control" id="productName" formControlName="productName">
+                    </div>
+                    <div class="mb-3">
+                        <label for="Brand" class="form-label">Brand</label>
+                        <input type="text" class="form-control" id="productStorage" formControlName="Brand">
+                    </div>
+                    <div class="mb-3">
+                        <label for="productPrice" class="form-label">Product Price</label>
+                        <input type="number" class="form-control" id="productPrice" formControlName="productPrice">
+                    </div>
+                    <div class="mb-3">
+                        <label for="formFile" class="form-label">Upload Profile Image</label>
+                        <input class="form-control" type="file" accept="image/png,image/jpeg" id="formFile"
+                            (change)="getImage($event)">
+                    </div>
+                    <div class="text-center">
+                        <button mat-raised-button matStepperNext color="warn" (click)="homePage()" class="me-3">Go to viewProduct Page</button>
+                        <button mat-raised-button matStepperNext color="accent">Next</button>
+
+                    </div>
+                </div>
+            </form>
+        </mat-step>
+
+        <mat-step [stepControl]="updateForm" label="Fill out your address">
+            <form [formGroup]="updateForm">
+                <ng-template matStepLabel>Fill out Other Detail</ng-template>
+
+                <div style="width: 600px; margin: auto;">
+                    <div class="mb-3">
+                    </div>
+                    <div class="mb-3">
+                        <label for="ModelName" class="form-label">Model Name</label>
+                        <input type="text" class="form-control" id="productName" formControlName="ModelName">
+                    </div>
+                    <div class="mb-3">
+                        <label for="color" class="form-label">color</label>
+                        <input type="text" class="form-control" id="productStorage" formControlName="color">
+                    </div>
+                    <div class="mb-3">
+                        <label for="Productsize" class="form-label">Product Size</label>
+                        <input type="text" class="form-control" id="productPrice" formControlName="Productsize">
+                    </div>
+                    <div class="mb-3">
+                        <label for="BodyMaterial" class="form-label">Body Material</label>
+                        <input type="text" class="form-control" id="productPrice" formControlName="BodyMaterial">
+                    </div>
+                    <div class="mb-3">
+                        <label for="PowerConsumption" class="form-label">Power Consumption</label>
+                        <input type="text" class="form-control" id="productPrice" formControlName="PowerConsumption">
+                    </div>
+                    <div class="mb-3">
+                        <label for="RemoteSupport" class="form-label">Remote Support</label>
+                        <input type="text" class="form-control" id="productPrice" formControlName="RemoteSupport">
+                    </div>
+                    <div class="mb-3">
+                        <label for="Warranty" class="form-label">Warranty Service</label>
+                        <input type="text" class="form-control" id="productPrice" formControlName="Warranty">
+                    </div>
+                    <div class="mb-3">
+                        <label for="NumberOfProduct" class="form-label">No. of Product</label>
+                        <input type="text" class="form-control" id="productPrice" formControlName="NumberOfProduct">
+                    </div>
+
+                    <div class="text-center">
+                        <button mat-raised-button matStepperPrevious color="warn" class="me-3">Back</button>
+                        <button mat-raised-button matStepperNext color="accent">Next</button>
+                    </div>
+                </div>
+            </form>
+        </mat-step>
+        <mat-step>
+            <ng-template matStepLabel>Done</ng-template>
+            <div class="text-center mt-5">
+                <button mat-raised-button matStepperPrevious color="warn" class="me-3">Back</button>
+                <button mat-raised-button (click)="stepper.reset()" color="accent" class="me-3">Reset</button>
+                <button type="submit" class="btn btn-primary me-3" (click)="updateproduct()">Update</button>
+            </div>
+        </mat-step>
+    </mat-stepper>
+</div>
+
+<div *ngIf="controleCloth">
+    <mat-stepper [linear]="isLinear" #stepper>
+        <mat-step [stepControl]="updateForm">
+            <form [formGroup]="updateForm">
+                <ng-template matStepLabel>Fill out Basic Detail</ng-template>
+
+                <div style="width: 600px; margin: auto;">
+                    <div class="mb-3">
+                        <label for="productType" class="form-label">Product Type </label>
+                        <input type="text" class="form-control" id="productType" formControlName="productType">
+                    </div>
+                    <div class="mb-3">
+                        <label for="productName" class="form-label">Product Name</label>
+                        <input type="text" class="form-control" id="productName" formControlName="productName">
+                    </div>
+                    <div class="mb-3">
+                        <label for="productSize" class="form-label">Product Size</label>
+                        <input type="text" class="form-control" id="productSize" formControlName="productSize">
+                    </div>
+                    <div class="mb-3">
+                        <label for="productPrice" class="form-label">Product Price</label>
+                        <input type="number" class="form-control" id="productPrice" formControlName="productPrice">
+                    </div>
+                    <div class="mb-3">
+                        <label for="formFile" class="form-label">Upload Profile Image</label>
+                        <input class="form-control" type="file" accept="image/png,image/jpeg" id="formFile"
+                            (change)="getImage($event)">
+                    </div>
+                    <div class="text-center">
+                        <button mat-raised-button matStepperNext color="warn" (click)="homePage()" class="me-3">Go to viewProduct Page</button>
+                        <button mat-raised-button matStepperNext color="accent" >Next</button>
+
+                    </div>
+                </div>
+            </form>
+        </mat-step>
+
+        <mat-step [stepControl]="updateForm" label="Fill out your address">
+            <form [formGroup]="updateForm">
+                <ng-template matStepLabel>Fill out Other Detail</ng-template>
+
+                <div style="width: 600px; margin: auto;">
+                    <div class="mb-3">
+                        <label for="ProductMaterial" class="form-label">Product Material</label>
+                        <input type="text" class="form-control" id="ProductMaterial" formControlName="ProductMaterial">
+                    </div>
+                    <div class="mb-3">
+                        <label for="productStorage" class="form-label">color</label>
+                        <input type="text" class="form-control" id="productStorage" formControlName="color">
+                    </div>
+                    <div class="mb-3">
+                        <label for="Type" class="form-label">Type</label>
+                        <input type="text" class="form-control" id="Type" formControlName="Type">
+                    </div>
+                    <div class="mb-3">
+                        <label for="Pattern" class="form-label">Pattern</label>
+                        <input type="text" class="form-control" id="Pattern" formControlName="Pattern">
+                    </div>
+                    <div class="mb-3">
+                        <label for="Pack" class="form-label">Pack Of</label>
+                        <input type="text" class="form-control" id="Pack" formControlName="Pack">
+                    </div>
+                    <div class="mb-3">
+                        <label for="CountryOfOrigin" class="form-label">Country of Origin</label>
+                        <input type="text" class="form-control" id="CountryOfOrigin" formControlName="CountryOfOrigin">
+                    </div>
+                    <div class="mb-3">
+                        <label for="NumberOfProduct" class="form-label">No. of Product</label>
+                        <input type="text" class="form-control" id="productPrice" formControlName="NumberOfProduct">
+                    </div>
+
+                    <div class="text-center">
+                        <button mat-raised-button matStepperPrevious color="warn" class="me-3">Back</button>
+                        <button mat-raised-button matStepperNext color="accent">Next</button>
+                    </div>
+                </div>
+            </form>
+        </mat-step>
+        <mat-step>
+            <ng-template matStepLabel>Done</ng-template>
+            <div class="text-center mt-5">
+                <button mat-raised-button matStepperPrevious color="warn" class="me-3">Back</button>
+                <button mat-raised-button (click)="stepper.reset()" color="accent" class="me-3">Reset</button>
+                <button type="submit" class="btn btn-primary me-3" (click)="updateproduct()">Update</button>
+            </div>
+        </mat-step>
+    </mat-stepper>
+</div>

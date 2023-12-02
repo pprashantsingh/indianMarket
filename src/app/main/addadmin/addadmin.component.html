@@ -1,0 +1,36 @@
+<div class="back-img">
+    <div class="form-container text-white">
+        <form [formGroup]="addadminform">
+            <div class="mb-3">
+                <label for="fullName" class="form-label">Full Name <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" id="fullName"  formControlName="fullName">
+                <span class="text-danger" *ngIf="(addadminform['controls']['fullName'].touched || submitted) && addadminform['controls']['fullName'].errors?.['required']">fullName is required</span>
+            </div>
+            <div class="mb-3">
+                <label for="Email" class="form-label">Email <span class="text-danger">*</span></label>
+                <input type="email" class="form-control" id="Email" formControlName="email" >
+                <span class="text-danger" *ngIf="(addadminform['controls']['email'].touched || submitted) && addadminform['controls']['email'].errors?.['required']">email is required</span>
+                <span class="text-danger" *ngIf="addadminform['controls']['email'].errors?.['pattern']">Please provide a valid email address</span>
+            </div>
+            <div class="mb-3">
+                <label for="Password" class="form-label">Password <span class="text-danger">*</span></label>
+                <input type="password" class="form-control" id="Password" formControlName="password">
+                <span class="text-danger" *ngIf="(addadminform['controls']['password'].touched || submitted) && addadminform['controls']['password'].errors?.['required']">password is required</span>
+                <span class="text-danger" *ngIf="addadminform['controls']['password'].errors?.['pattern']">password At least 8 characters which content Lowercase <br> Uppercase letters Numbers and Special characters</span>
+            </div>
+            <div class="mb-3">
+                <label for="Contact" class="form-label">Contact Number <span class="text-danger">*</span></label>
+                <input type="number" class="form-control" id="Contact" formControlName="contactNumber">
+                <span class="text-danger" *ngIf="(addadminform['controls']['contactNumber'].touched || submitted) && addadminform['controls']['contactNumber'].errors?.['required']">Contact Number is required</span>
+                <span class="text-danger" *ngIf="addadminform['controls']['contactNumber'].errors?.['pattern']">Enter valid contact number</span>
+            </div>
+            <div class="mb-3">
+                <label for="formFile" class="form-label">Upload Profile Image</label>
+                <input class="form-control" type="file" id="formFile">
+            </div>
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary" (click)="addAdmin()">Submit</button>
+            </div>
+        </form>
+    </div>
+</div>

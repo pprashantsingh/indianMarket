@@ -1,0 +1,17 @@
+.main-container {
+    display: flex;
+    flex-direction: row;
+    height: 92vh;
+}
+
+.first-container {
+    width: 12%;
+    height: 100%;
+}
+
+.second-container {
+    width: 88%;
+    height: 100%;
+
+}
+
