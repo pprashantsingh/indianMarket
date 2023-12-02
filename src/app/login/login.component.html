@@ -1,0 +1,24 @@
+<div class="login-img">
+    <div class="form-container text-white">
+    <div class="text-center">
+        <h1>Apna Bazar Admin Login Form</h1>
+    </div>
+    <form [formGroup]="loginform">
+        <div class="mb-3">
+            <label for="Email" class="form-label">Email <span class="text-danger">*</span></label>
+            <input type="email" class="form-control" id="Email" formControlName="email">
+            <span class="text-danger" *ngIf="(loginform['controls']['email'].touched || submitted) && loginform['controls']['email'].errors?.['required']">email is required</span>
+                <span class="text-danger" *ngIf="loginform['controls']['email'].errors?.['pattern']">Please provide a valid email address</span>
+
+        </div>
+        <div class="mb-3">
+            <label for="Password" class="form-label">Password <span class="text-danger">*</span></label>
+            <input type="password" class="form-control" id="Password" formControlName="password">
+            <span class="text-danger" *ngIf="(loginform['controls']['password'].touched || submitted) && loginform['controls']['password'].errors?.['required']">password is required</span>
+        </div>
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary" (click)="login()">Login</button>
+        </div>
+    </form>
+    </div>
+</div>
