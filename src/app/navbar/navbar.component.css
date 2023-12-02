@@ -1,0 +1,6 @@
+.navbar-container {
+    position: sticky;
+    height: 8vh;
+    top: 0px;
+    z-index: 999;
+}
