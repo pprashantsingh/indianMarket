@@ -1,0 +1,28 @@
+.sidebar-container {
+    background-color: #253544;
+    height: 100%;
+    position: fixed;
+    width: 12%;
+    color: white;
+    /* margin-top: 60px; */
+}
+
+a {
+    text-decoration: none;
+    font-size: 16px;
+    color: white;
+    display: block;
+    /* padding-top: 20px; */
+}
+
+
+.url-sty{
+    padding-right: 20px;
+    padding-bottom: 15px;
+}
+.active{
+    color: purple;
+}
+.sidebar{
+    font-weight: bold;
+}
